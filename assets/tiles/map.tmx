@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="9">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="11">
  <tileset firstgid="1" name="background" tilewidth="32" tileheight="32" tilecount="713" columns="31">
   <image source="../images/background.png" width="1000" height="750"/>
  </tileset>
@@ -77,5 +77,8 @@
   <object id="6" x="672.667" y="492.667" width="190.667" height="19.3333"/>
   <object id="7" x="800.667" y="610.667" width="95.3333" height="125.333"/>
   <object id="8" x="896.667" y="642.667" width="128" height="94"/>
+ </objectgroup>
+ <objectgroup id="6" name="water">
+  <object id="10" x="640" y="645.333" width="160" height="90.6667"/>
  </objectgroup>
 </map>
