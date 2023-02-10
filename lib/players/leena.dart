@@ -9,6 +9,7 @@ class Leena extends SpriteComponent
     with CollisionCallbacks, HasGameRef<LeenaGame>, KeyboardHandler {
   Leena() : super() {
     debugMode = true;
+    anchor = Anchor.bottomCenter;
   }
 
   double gravity = 9;
@@ -22,13 +23,18 @@ class Leena extends SpriteComponent
   Future<void> onLoad() async {
     sprite = await gameRef.loadSprite('girl_push_single_00.png');
     size = Vector2.all(100);
-    position = Vector2(700, 30);
+    position = Vector2(624, 30);
     add(RectangleHitbox());
     return super.onLoad();
   }
 
   @override
   void update(double dt) {
+    //moving left
+    // if(velocity.x < 0){
+    //   velocity.x += gameRef.
+    // }
+
     if (!onGround) {
       velocity.y += gravity;
     }
@@ -39,8 +45,26 @@ class Leena extends SpriteComponent
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Ground) {
-      velocity.y = 0;
-      onGround = true;
+      if (velocity.y > 0) {
+        if (intersectionPoints.length == 2) {
+          var x1 = intersectionPoints.first[0];
+          var x2 = intersectionPoints.last[0];
+          if ((x1 - x2).abs() < 2) {
+            // velocity.y = 100;
+          } else {
+            velocity.y = 0;
+            onGround = true;
+          }
+        }
+      } else {
+        if (velocity.x != 0) {
+          for (var point in intersectionPoints) {
+            if (y - 5 >= point.y) {
+              velocity.x = 0;
+            }
+          }
+        }
+      }
     }
     super.onCollision(intersectionPoints, other);
   }
@@ -60,7 +84,7 @@ class Leena extends SpriteComponent
     if (keysPressed.contains(LogicalKeyboardKey.arrowLeft)) {
       print('move left');
       velocity.x -= pushSpeed;
-      if(!facingLeft){
+      if (!facingLeft) {
         facingLeft = true;
         flipHorizontallyAroundCenter();
       }
@@ -69,7 +93,7 @@ class Leena extends SpriteComponent
     if (keysPressed.contains(LogicalKeyboardKey.arrowRight)) {
       print('move right');
       velocity.x += pushSpeed;
-      if(facingLeft){
+      if (facingLeft) {
         facingLeft = false;
         flipHorizontallyAroundCenter();
       }

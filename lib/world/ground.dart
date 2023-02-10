@@ -7,6 +7,8 @@ class Ground extends PositionComponent {
     debugMode = true;
   }
 
+  final groundResistance = 0.22;
+
   @override
   Future<void> onLoad()async {
     add(RectangleHitbox());
